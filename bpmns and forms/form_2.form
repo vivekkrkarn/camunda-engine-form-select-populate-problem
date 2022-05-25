@@ -1,0 +1,40 @@
+{
+  "components": [
+    {
+      "label": "Value 1",
+      "type": "textfield",
+      "id": "Field_098zs1d",
+      "key": "value_1"
+    },
+    {
+      "label": "Value 2",
+      "type": "textfield",
+      "id": "Field_0itgq19",
+      "key": "value_2"
+    },
+    {
+      "values": [
+        {
+          "label": "Value",
+          "value": "value"
+        }
+      ],
+      "label": "Show received data from demo listener application in this select box",
+      "type": "select",
+      "id": "Field_0qjree6",
+      "key": "select_box_1",
+      "properties": {
+        "key1": "value"
+      }
+    }
+  ],
+  "type": "default",
+  "id": "form_2",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}
