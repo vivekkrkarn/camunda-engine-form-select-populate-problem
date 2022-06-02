@@ -5,8 +5,8 @@ camunda.bpm.client:
     username: demo    #put here camundaEngine username
     password: demo    #put here camundaEngine password
   subscriptions:
-    topic121:
-      variable-names: value_1, value_2 # only fetch these two variables
-      process-definition-key: demo_process_1
+    my-hml-form-test1-topic:
+      variable-names: yourName # only fetch these two variables
+      process-definition-key: my-html-form-test-bpmn1
 
 logging.level.org.camunda.bpm.client: DEBUG # increase the log level of the application

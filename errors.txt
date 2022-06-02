@@ -1,0 +1,117 @@
+My listener error --->
+
+org.camunda.bpm.client.exception.NotResumedException: TASK/CLIENT-01009 Exception while completing the external task: The corresponding process instance could not be resumed. Reason: status code: 500, reason phrase: {"type":"ProcessEngineException","message":"Cannot find serializer for value 'ObjectValue [value=null, isDeserialized=false, serializationDataFormat=application/json, objectTypeName=org.camunda.spin.impl.json.jackson.JacksonJsonNode, serializedValue=158 chars, isTransient=false]'."}
+	at org.camunda.bpm.client.impl.ExternalTaskClientLogger.externalTaskServiceException(ExternalTaskClientLogger.java:124) ~[camunda-external-task-client-7.17.0.jar:7.17.0]
+	at org.camunda.bpm.client.task.impl.ExternalTaskServiceImpl.complete(ExternalTaskServiceImpl.java:101) ~[camunda-external-task-client-7.17.0.jar:7.17.0]
+	at org.camunda.bpm.client.task.impl.ExternalTaskServiceImpl.complete(ExternalTaskServiceImpl.java:94) ~[camunda-external-task-client-7.17.0.jar:7.17.0]
+	at org.camunda.bpm.client.task.impl.ExternalTaskServiceImpl.complete(ExternalTaskServiceImpl.java:89) ~[camunda-external-task-client-7.17.0.jar:7.17.0]
+	at com.example.demolistener.handler.MyHtmlFormTopicHandler.execute(MyHtmlFormTopicHandler.java:78) ~[classes/:na]
+	at org.camunda.bpm.client.topic.impl.TopicSubscriptionManager.handleExternalTask(TopicSubscriptionManager.java:155) ~[camunda-external-task-client-7.17.0.jar:7.17.0]
+	at org.camunda.bpm.client.topic.impl.TopicSubscriptionManager.lambda$acquire$0(TopicSubscriptionManager.java:110) ~[camunda-external-task-client-7.17.0.jar:7.17.0]
+	at java.base/java.util.Arrays$ArrayList.forEach(Arrays.java:4390) ~[na:na]
+	at org.camunda.bpm.client.topic.impl.TopicSubscriptionManager.acquire(TopicSubscriptionManager.java:105) ~[camunda-external-task-client-7.17.0.jar:7.17.0]
+	at org.camunda.bpm.client.topic.impl.TopicSubscriptionManager.run(TopicSubscriptionManager.java:89) ~[camunda-external-task-client-7.17.0.jar:7.17.0]
+	at java.base/java.lang.Thread.run(Thread.java:829) ~[na:na]
+	
+	
+	-------------------------------------------------------------
+	
+	My test camunda listener error --->
+	
+	2022-06-02 21:55:44.663  WARN 12364 --- [nio-8080-exec-5] org.camunda.bpm.engine.rest.exception    : ENGINE-REST-HTTP500 org.camunda.bpm.engine.ProcessEngineException: Cannot find serializer for value 'ObjectValue [value=null, isDeserialized=false, serializationDataFormat=application/json, objectTypeName=org.camunda.spin.impl.json.jackson.JacksonJsonNode, serializedValue=158 chars, isTransient=false]'.
+	at org.camunda.bpm.engine.impl.variable.serializer.DefaultVariableSerializers.findSerializerForValue(DefaultVariableSerializers.java:88)
+	at org.camunda.bpm.engine.impl.persistence.entity.util.TypedValueField.setValue(TypedValueField.java:122)
+	at org.camunda.bpm.engine.impl.persistence.entity.VariableInstanceEntity.<init>(VariableInstanceEntity.java:131)
+	at org.camunda.bpm.engine.impl.persistence.entity.VariableInstanceEntity.create(VariableInstanceEntity.java:150)
+	at org.camunda.bpm.engine.impl.persistence.entity.VariableInstanceEntityFactory.build(VariableInstanceEntityFactory.java:31)
+	at org.camunda.bpm.engine.impl.persistence.entity.VariableInstanceEntityFactory.build(VariableInstanceEntityFactory.java:25)
+	at org.camunda.bpm.engine.impl.core.variable.scope.AbstractVariableScope.setVariableLocal(AbstractVariableScope.java:363)
+	at org.camunda.bpm.engine.impl.core.variable.scope.AbstractVariableScope.setVariable(AbstractVariableScope.java:319)
+	at org.camunda.bpm.engine.impl.core.variable.scope.AbstractVariableScope.setVariable(AbstractVariableScope.java:314)
+	at org.camunda.bpm.engine.impl.core.variable.scope.AbstractVariableScope.setVariable(AbstractVariableScope.java:294)
+	at org.camunda.bpm.engine.impl.core.variable.scope.AbstractVariableScope.lambda$setVariables$0(AbstractVariableScope.java:245)
+	at org.camunda.bpm.engine.impl.core.variable.VariableUtil.setVariables(VariableUtil.java:100)
+	at org.camunda.bpm.engine.impl.core.variable.scope.AbstractVariableScope.setVariables(AbstractVariableScope.java:244)
+	at org.camunda.bpm.engine.impl.core.variable.scope.AbstractVariableScope.setVariables(AbstractVariableScope.java:249)
+	at org.camunda.bpm.engine.impl.persistence.entity.ExternalTaskEntity.ensureVariablesSet(ExternalTaskEntity.java:499)
+	at org.camunda.bpm.engine.impl.persistence.entity.ExternalTaskEntity.complete(ExternalTaskEntity.java:368)
+	at org.camunda.bpm.engine.impl.cmd.CompleteExternalTaskCmd.execute(CompleteExternalTaskCmd.java:45)
+	at org.camunda.bpm.engine.impl.cmd.HandleExternalTaskCmd.execute(HandleExternalTaskCmd.java:59)
+	at org.camunda.bpm.engine.impl.cmd.HandleExternalTaskCmd.execute(HandleExternalTaskCmd.java:31)
+	at org.camunda.bpm.engine.impl.interceptor.CommandExecutorImpl.execute(CommandExecutorImpl.java:28)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:110)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:72)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.ProcessApplicationContextInterceptor.execute(ProcessApplicationContextInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.CommandCounterInterceptor.execute(CommandCounterInterceptor.java:35)
+	at org.camunda.bpm.engine.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:33)
+	at org.camunda.bpm.engine.impl.ExternalTaskServiceImpl.complete(ExternalTaskServiceImpl.java:64)
+	at org.camunda.bpm.engine.rest.sub.externaltask.impl.ExternalTaskResourceImpl.complete(ExternalTaskResourceImpl.java:119)
+	at jdk.internal.reflect.GeneratedMethodAccessor331.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:124)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:167)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$VoidOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:159)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:79)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:475)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:397)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:255)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:234)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:684)
+	at org.glassfish.jersey.servlet.WebComponent.serviceImpl(WebComponent.java:394)
+	at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:346)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:366)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:319)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.camunda.bpm.engine.rest.filter.CacheControlFilter.doFilter(CacheControlFilter.java:45)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.camunda.bpm.engine.rest.filter.EmptyBodyFilter.doFilter(EmptyBodyFilter.java:99)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:359)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:889)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1735)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+2022-06-02 21:55:46.196 ERROR 12364 --- [nio-8080-exec-7] org.camunda.bpm.engine.context           : ENGINE-16004 Exception while closing command context: Cannot find serializer for value 'ObjectValue [value=null, isDeserialized=false, serializationDataFormat=application/json, objectTypeName=org.camunda.spin.impl.json.jackson.JacksonJsonNode, serializedValue=158 chars, isTransient=false]'.
+

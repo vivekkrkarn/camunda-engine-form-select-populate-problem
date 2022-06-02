@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0e5z78s" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:process id="my-html-form-test-bpmn1" name="my-html-form-test-bpmn1" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Start">
+      <bpmn:outgoing>Flow_19k1bwv</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_0dwox38" name="End">
+      <bpmn:incoming>Flow_1l55mlm</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_19k1bwv" sourceRef="StartEvent_1" targetRef="Activity_075j2ww" />
+    <bpmn:sequenceFlow id="Flow_0ryxt2s" sourceRef="Activity_075j2ww" targetRef="Activity_0otpori" />
+    <bpmn:sequenceFlow id="Flow_02z8nwr" sourceRef="Activity_0otpori" targetRef="Activity_0nps72b" />
+    <bpmn:sequenceFlow id="Flow_0jzzq84" sourceRef="Activity_0nps72b" targetRef="Activity_04xjrnh" />
+    <bpmn:sequenceFlow id="Flow_1l55mlm" sourceRef="Activity_04xjrnh" targetRef="Event_0dwox38" />
+    <bpmn:userTask id="Activity_075j2ww" name="Say Hello" camunda:formKey="embedded:app:forms/my-say-hello-form.html">
+      <bpmn:incoming>Flow_19k1bwv</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ryxt2s</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_0otpori" name="Calling Sop Service And Getting Values" camunda:type="external" camunda:topic="my-hml-form-test1-topic">
+      <bpmn:incoming>Flow_0ryxt2s</bpmn:incoming>
+      <bpmn:outgoing>Flow_02z8nwr</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_0nps72b" name="Displaying Html Form And Populating Select" camunda:formKey="embedded:app:forms/my-select-form.html">
+      <bpmn:incoming>Flow_02z8nwr</bpmn:incoming>
+      <bpmn:outgoing>Flow_0jzzq84</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_04xjrnh" name="Review All" camunda:formKey="embedded:app:forms/my-review-form.html">
+      <bpmn:incoming>Flow_0jzzq84</bpmn:incoming>
+      <bpmn:outgoing>Flow_1l55mlm</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="my-html-form-test-bpmn1">
+      <bpmndi:BPMNEdge id="Flow_19k1bwv_di" bpmnElement="Flow_19k1bwv">
+        <di:waypoint x="215" y="97" />
+        <di:waypoint x="280" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ryxt2s_di" bpmnElement="Flow_0ryxt2s">
+        <di:waypoint x="380" y="97" />
+        <di:waypoint x="420" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02z8nwr_di" bpmnElement="Flow_02z8nwr">
+        <di:waypoint x="520" y="97" />
+        <di:waypoint x="570" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jzzq84_di" bpmnElement="Flow_0jzzq84">
+        <di:waypoint x="670" y="97" />
+        <di:waypoint x="700" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1l55mlm_di" bpmnElement="Flow_1l55mlm">
+        <di:waypoint x="800" y="97" />
+        <di:waypoint x="842" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="79" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="185" y="122" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0dwox38_di" bpmnElement="Event_0dwox38">
+        <dc:Bounds x="842" y="79" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="850" y="122" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0p8jo3y_di" bpmnElement="Activity_075j2ww">
+        <dc:Bounds x="280" y="57" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0f3wgfv_di" bpmnElement="Activity_0otpori">
+        <dc:Bounds x="420" y="57" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1r4j503_di" bpmnElement="Activity_0nps72b">
+        <dc:Bounds x="570" y="57" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1xkt1tg_di" bpmnElement="Activity_04xjrnh">
+        <dc:Bounds x="700" y="57" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

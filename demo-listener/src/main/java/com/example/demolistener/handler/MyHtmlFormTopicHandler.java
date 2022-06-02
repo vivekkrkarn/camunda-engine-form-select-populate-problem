@@ -1,33 +1,30 @@
 package com.example.demolistener.handler;
 
-import com.example.demolistener.pojos.TestPojo;
 import org.camunda.bpm.client.spring.annotation.ExternalTaskSubscription;
 import org.camunda.bpm.client.task.ExternalTask;
 import org.camunda.bpm.client.task.ExternalTaskHandler;
 import org.camunda.bpm.client.task.ExternalTaskService;
-import org.camunda.bpm.engine.variable.VariableMap;
-import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.spin.Spin;
+import org.camunda.spin.json.SpinJsonNode;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static org.camunda.spin.Spin.JSON;
-
 @Component
-@ExternalTaskSubscription("topic121") // create a subscription for this topic name
-public class Topic121Handler implements ExternalTaskHandler {
+@ExternalTaskSubscription("my-hml-form-test1-topic") // create a subscription for this topic name
+public class MyHtmlFormTopicHandler implements ExternalTaskHandler {
 
 
     @Override
     public void execute(ExternalTask externalTask, ExternalTaskService externalTaskService) {
         // get variables
 
-        String value_1 = externalTask.getVariable("value_1");
-        String value_2 = externalTask.getVariable("value_2");
+        String yourName = externalTask.getVariable("yourName");
 
-        Logger.getLogger("topic121").log(Level.INFO, "Received variables value_1 {0} and value_2 {1}", new Object[]{value_1, value_2});
+        Logger.getLogger("my-hml-form-test1-topic").log(Level.INFO, "Received variables yourName {0}", new Object[]{yourName});
 
         /*//prepare some varibles to send
         String customerId = "C-" + UUID.randomUUID().toString().substring(32);
@@ -37,7 +34,7 @@ public class Topic121Handler implements ExternalTaskHandler {
         variablesToSend.put("customerId", customerId);
         variablesToSend.put("creditScore", creditScore);*/
 
-        TestPojo pojo1 = new TestPojo();
+        /*TestPojo pojo1 = new TestPojo();
         pojo1.setId(1);
         pojo1.setName("This is one");
         pojo1.setValue("value11");
@@ -53,21 +50,31 @@ public class Topic121Handler implements ExternalTaskHandler {
 
         List<TestPojo> myPojoList = new ArrayList<>();
         myPojoList.add(pojo1);
-        myPojoList.add(pojo2);
+        myPojoList.add(pojo2);*/
 
 
 
-        String myJsonDataToSend = JSON(myPojoList).toString();
+        /*String myJsonDataToSend = JSON(myPojoList).toString();
 
         Map<String,Object> myResults = new HashMap<>();
-        myResults.put("myData",myJsonDataToSend);
+        myResults.put("myData",myJsonDataToSend);*/
+
+        Map<String, String> slaSelectValues = new HashMap<String, String>();
+        slaSelectValues.put("001", "Advanced");
+        slaSelectValues.put("002", "Premium");
+        slaSelectValues.put("003", "Standard");
+
+
+        Map<String,Object> myResults = new HashMap<>();
+        myResults.put("myDataValues",Spin.JSON(slaSelectValues));
+
 
 
 
         // complete the external task
         externalTaskService.complete(externalTask, myResults);
 
-        Logger.getLogger("topic121").log(Level.INFO, "sent variable myResult {0} ", myResults);
+        Logger.getLogger("my-hml-form-test1-topic").log(Level.INFO, "sent variable myResult {0} ", myResults);
 
     }
 }
