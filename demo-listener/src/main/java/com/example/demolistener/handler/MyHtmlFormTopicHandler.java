@@ -4,6 +4,10 @@ import org.camunda.bpm.client.spring.annotation.ExternalTaskSubscription;
 import org.camunda.bpm.client.task.ExternalTask;
 import org.camunda.bpm.client.task.ExternalTaskHandler;
 import org.camunda.bpm.client.task.ExternalTaskService;
+import org.camunda.bpm.client.variable.ClientValues;
+import org.camunda.bpm.client.variable.value.JsonValue;
+import org.camunda.bpm.engine.variable.VariableMap;
+import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.spin.Spin;
 import org.camunda.spin.json.SpinJsonNode;
 import org.springframework.stereotype.Component;
@@ -65,16 +69,22 @@ public class MyHtmlFormTopicHandler implements ExternalTaskHandler {
         slaSelectValues.put("003", "Standard");
 
 
-        Map<String,Object> myResults = new HashMap<>();
-        myResults.put("myDataValues",Spin.JSON(slaSelectValues));
+//        Map<String,Object> myResults = new HashMap<>();
+//        myResults.put("myDataValues",Spin.JSON(slaSelectValues));
 
+        VariableMap variables = Variables.createVariables();
+        JsonValue myDataValues = ClientValues.jsonValue(Spin.JSON(slaSelectValues).toString());
+        variables.put("myDataValues", myDataValues);
 
+        // complete the external task
+        externalTaskService.complete(externalTask, variables);
 
 
         // complete the external task
-        externalTaskService.complete(externalTask, myResults);
+        //externalTaskService.complete(externalTask, myResults);
 
-        Logger.getLogger("my-hml-form-test1-topic").log(Level.INFO, "sent variable myResult {0} ", myResults);
+        //Logger.getLogger("my-hml-form-test1-topic").log(Level.INFO, "sent variable myResult {0} ", myResults);
+        Logger.getLogger("my-hml-form-test1-topic").log(Level.INFO, "sent variable myResult {0} ", variables);
 
     }
 }
