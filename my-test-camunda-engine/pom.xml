@@ -49,6 +49,15 @@
       <groupId>org.camunda.bpm.springboot</groupId>
       <artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId>
     </dependency>
+	
+	<dependency>      
+    <groupId>org.camunda.bpm</groupId>      
+    <artifactId>camunda-engine-plugin-spin</artifactId>    
+</dependency>
+<dependency>      
+    <groupId>org.camunda.spin</groupId>      
+    <artifactId>camunda-spin-dataformat-json-jackson</artifactId>    
+</dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
